@@ -16,33 +16,37 @@ public class Main {
 		monsterList.add(new Slime("スライム", 100, 10));
 		monsterList.add(new Oak("オーク", 100, 10));
 		monsterList.add(new Dragon("ドラゴン", 100, 10));
-		
+
 		while (!(humanList.size() == 0) && !(monsterList.size() == 0)) {
-			
+
+			human();
 			// humanListから乱数を取得
 			int randHuman = Rand.get(humanList.size());
 			Human human = humanList.get(randHuman);
-			
 			// monsterListから乱数を取得
 			int randMonster = Rand.get(monsterList.size());
 			Monster monster = monsterList.get(randMonster);
-			
-			human();
 			human.attack(monster);
 			if (monster.hp <= 0) {
 				System.out.println(monster.name + "が倒れた！");
 				monsterList.remove(monster);
 			}
 			monster();
+			// humanListから乱数を取得
+			randHuman = Rand.get(humanList.size());
+			human = humanList.get(randHuman);
+			// monsterListから乱数を取得
+			randMonster = Rand.get(monsterList.size());
+			monster = monsterList.get(randMonster);
 			monster.attack(human);
 			if (human.hp <= 0) {
 				System.out.println(human.name + "が倒れた！");
 				humanList.remove(human);
 			}
 		}
-		if (humanList.size() == 0) {
+		if (monsterList.size() == 0) {
 			System.out.println("人間たちの勝利！");
-		} else if (monsterList.size() == 0) {
+		} else if (humanList.size() == 0) {
 			System.out.println("モンスターたちの勝利！");
 		}
 	}
